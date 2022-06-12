@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <hr>
+  <h1>Detail</h1>
+  <hr>
+  <div>
+    <div>
+      <h2>{{ movie.title }}</h2>
+      <img src="{{ movie.poster_path }}" alt="mv">
+      <p>평점: {{movie.vote_average}}</p>
+      <h3>추천영화</h3>
+      <div class="row d-flex">
+          {% for rc_movie in movie.recommend_movies.all %}
+            <img src="{{ rc_movie.poster_path }}" alt="">
+            {{ rc_movie.title }}
+          {% endfor %}
+      </div>
+      <hr>
+      <div class="row d-flex">
+        {% for actor in movie.actors.all %}
+          <img src="{{ actor.profile_path }}" alt="actor">
+          <p>{{actor.poster_path}}</p>
+          <p>{{actor.name}}</p>
+          <p>{{actor.character}}</p>
+          <hr>
+        {% endfor %}
+      </div>
+      <a href="{% url 'movies:index' %}">[BACK]</a>
+      <hr>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <hr>
+  <h1>Movies</h1>
+  <hr>
+  <div>
+    {% for movie in movies %}
+    <div>
+      <h2>{{ movie.title }}</h2>
+      <img src="{{ movie.poster_path }}" alt="mv">
+      <p>평점: {{movie.vote_average}}</p>
+      {% for genre in movie.genres.all %}
+        <p>{{ genre.genre_name }}</p>
+      {% endfor %}
+      <a href="{% url 'movies:detail' movie.pk %}">[DETAIL]</a>
+      <hr>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}
